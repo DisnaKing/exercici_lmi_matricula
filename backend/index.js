@@ -1,9 +1,9 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-import { exec } from 'child_process';
+import {exec} from 'child_process';
 import bodyParser from 'body-parser';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 
 // Inicialització d'Express
@@ -56,31 +56,35 @@ app.post('/enviar-matricula', async (req, res) => {
 
 // Funció auxiliar per a generar l'XML
 function generarXML(dades) {
-    /*
-    TO-DO:
+    console.log(dades);
+    return `<matricula>
+  <alumne>
+    <nom>${dades.nom}</nom>
+    <cognoms>${dades.cognoms}</cognoms>
+    <email>${dades.Email}</email>
+    <adreca>${dades.Direccio}</adreca>
+    <telefon>${dades.telefon}</telefon>
+  </alumne>
+  <cicle>${dades.cicle}</cicle>
+  <curs>${dades.curs}</curs>
+<moduls>
+  ${
+        Array.isArray(dades.moduls)
+            ? dades.moduls.map(modul => `    <modul>${modul}</modul>`).join('\n')
+            : ''
+    }
+</moduls>
 
-    Amb les dades rebudes, generem un XML, amb el format corresponent (veieu exemple)
-    */
-    return `
-<matricula>
-  ...
-</matricula>
-    `;
+</matricula>`;
+
 }
 
 // Funció auxiliar per aplicar l'XSLT
 function transformarXSLT(xmlPath, foPath) {
     return new Promise((resolve, reject) => {
-        /*
-        TO-DO:
 
-        Crea l'ordre xsltproc per convertir l'xml definit en xmlPath en un XML en format
-        XSL-FO en foPath. 
-
-        La plantilla la guardareu en ./xslt/matricula.xsl
-
-        */
-        const cmd = ``;
+        const xslPath = path.join(__dirname, 'xslt', 'matricula.xsl');
+        const cmd = `xsltproc "${xslPath}" "${xmlPath}" > "${foPath}"`;
 
         exec(cmd, (error, stdout, stderr) => {
             if (error) {
@@ -95,12 +99,6 @@ function transformarXSLT(xmlPath, foPath) {
 // Funció auxiliar per a generar el PDF (cridant Apache FOP)
 function generarPDF(foPath, pdfPath) {
     return new Promise((resolve, reject) => {
-        /* TO-DO: 
-        
-        Crea l'ordre que utilitzaràs amb fop per convertir l'XML-FO a PDF
-        L'xml-fo es troba a foPath i el pdf el generaràs en pdfPath 
-
-        */
         
         const cmd = `fop "${foPath}" "${pdfPath}"`;
 
