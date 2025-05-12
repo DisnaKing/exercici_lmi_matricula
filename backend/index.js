@@ -29,8 +29,12 @@ app.get('/', (req, res) => {
 // Endpoint POST per a rebre les dades del formulari
 app.post('/enviar-matricula', async (req, res) => {
     try {
-        // 1. Recollir les dades del formulari
-        const dadesMatricula = req.body;
+// 1. Recollir les dades del formulari
+const dadesMatricula = req.body.dadesMatricula;
+
+// Mostrem les dades per la consola
+console.log("Dades rebudes al body:", req.body);
+console.log("dades recollides del formulari: " + dadesMatricula.nom); // Mostra undefined
 
         // 2. Generar XML amb les dades
         const xmlPath = path.join(__dirname, 'uploads', 'matricula.xml');
@@ -56,13 +60,34 @@ app.post('/enviar-matricula', async (req, res) => {
 
 // Funció auxiliar per a generar l'XML
 function generarXML(dades) {
-    console.log(dades);
+    console.log("nom: " + dades.nom);
+    const datos = `<matricula>
+        <alumne>
+            <nom>${dades.nom}</nom>
+            <cognoms>${dades.cognoms}</cognoms>
+            <email>${dades.Email}</email>
+            <adreca>${dades.adreca}</adreca>
+            <telefon>${dades.telefon}</telefon>
+        </alumne>
+        <cicle>${dades.cicle}</cicle>
+        <curs>${dades.curs}</curs>
+        <moduls>
+            ${
+        Array.isArray(dades.moduls)
+            ? dades.moduls.map(modul => `<modul>${modul}</modul>`).join('\n')
+            : ''
+    }
+        </moduls>
+
+    </matricula>`;
+    console.log("dades del generarXML:" + datos);
+
     return `<matricula>
   <alumne>
     <nom>${dades.nom}</nom>
     <cognoms>${dades.cognoms}</cognoms>
     <email>${dades.Email}</email>
-    <adreca>${dades.Direccio}</adreca>
+    <adreca>${dades.adreca}</adreca>
     <telefon>${dades.telefon}</telefon>
   </alumne>
   <cicle>${dades.cicle}</cicle>

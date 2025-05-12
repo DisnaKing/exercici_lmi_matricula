@@ -94,39 +94,28 @@ form.addEventListener('submit', async (e) => {
         nom: formData.get('nom'),
         cognoms: formData.get('cognoms'),
         Email: formData.get('Email'),
-        Direccio: formData.get('adreça'),
+        adreca: formData.get('adreca'),
         telefon: formData.get('telefon'),
         cicle: formData.get('cicle'),
         curs: formData.get('curs'),
         moduls: formData.getAll('moduls')
     };
 
-    // Podeu consultar la documentació de la finterfície FormData en: 
-    // https://developer.mozilla.org/en-US/docs/Web/API/FormData
-    // Per agafar les propietats des d'aquesta interfície fem ús de form.get('nom_del_camp_del_formulari')
+    // Mostrem les dades per la consola
+    console.log("nom: "+ formData.get('nom'));
 
+    const resposta = await fetch('/enviar-matricula', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Especifica que enviem JSON
+        },
+        body: JSON.stringify({dadesMatricula})
+    });
+    console.log(JSON.stringify({dadesMatricula}))
+    if (!resposta.ok) {
+        throw new Error('Error en la resposta del servidor');
+    }
 
-    /* TO-DO
-    
-    Prepara un objece JSON amb la informació guardada al formulari
-
-    */
-
-    // I l'enviem, fent ús d'una petició POST
-    // Recordeu convertir el JSON a un string per enviar-lo al servidor
-    // Una vegada rebuda la resposta, creeu una URL amb ell, un enllaç
-    // i forceu el clic en ell per descarregar el document.
-
-        const resposta = await fetch('/enviar-matricula', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // Especifica que enviem JSON
-            },
-            body: JSON.stringify({dadesMatricula})
-        });
-        if (!resposta.ok) {
-            throw new Error('Error en la resposta del servidor');
-        }
     // Esperem una resposta tipus blob (PDF, etc.)
         const blob = await resposta.blob();
 

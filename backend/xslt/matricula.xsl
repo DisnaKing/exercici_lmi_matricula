@@ -37,7 +37,7 @@
                 <fo:table-cell border="solid 1px black" padding="5pt">
                   <fo:block>
                     <!-- Incorpora aci la ruta per accedir al nom de l'alumne -->
-                    <xsl:value-of select="matricula/nom"/>
+                    <xsl:value-of select="matricula/alumne/nom"/>
                   </fo:block>
                 </fo:table-cell>
               </fo:table-row>
@@ -48,7 +48,7 @@
                 <fo:table-cell border="solid 1px black" padding="5pt">
                   <fo:block>
                     <!-- Incorpora aci la ruta per accedir als cognoms de l'alumne -->
-                    <xsl:value-of select="matricula/cognoms"/>
+                    <xsl:value-of select="matricula/alumne/cognoms"/>
 
                   </fo:block>
                 </fo:table-cell>
@@ -60,7 +60,7 @@
                 <fo:table-cell border="solid 1px black" padding="5pt">
                   <fo:block>
                       <!-- Incorpora aci la ruta per accedir al correu de l'alumne -->
-                    <xsl:value-of select="matricula/Email"/>
+                    <xsl:value-of select="matricula/alumne/email"/>
                   </fo:block>
                 </fo:table-cell>
               </fo:table-row>
@@ -71,7 +71,7 @@
                 <fo:table-cell border="solid 1px black" padding="5pt">
                   <fo:block>
                       <!-- Incorpora aci la ruta per accedir a l'adreça de l'alumne -->
-                    <xsl:value-of select="matricula/adreca"/>
+                    <xsl:value-of select="matricula/alumne/adreca"/>
                   </fo:block>
                 </fo:table-cell>
               </fo:table-row>
@@ -82,7 +82,7 @@
                 <fo:table-cell border="solid 1px black" padding="5pt">
                   <fo:block>
                       <!-- Incorpora aci la ruta per accedir al telèfon de l'alumne -->
-                    <xsl:value-of select="matricula/telefon"/>
+                    <xsl:value-of select="matricula/alumne/telefon"/>
                   </fo:block>
                 </fo:table-cell>
               </fo:table-row>

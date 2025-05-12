@@ -1,15 +1,18 @@
 <matricula>
   <alumne>
-    <nom>undefined</nom>
-    <cognoms>undefined</cognoms>
-    <email>undefined</email>
-    <adreca>undefined</adreca>
-    <telefon>undefined</telefon>
+    <nom>puto</nom>
+    <cognoms>asdf</cognoms>
+    <email>adsf@asdf</email>
+    <adreca>adsfaew</adreca>
+    <telefon>123</telefon>
   </alumne>
-  <cicle>undefined</cicle>
-  <curs>undefined</curs>
+  <cicle>DAM</cicle>
+  <curs>Primer</curs>
 <moduls>
-  
+      <modul>Programació</modul>
+    <modul>Bases de Dades</modul>
+    <modul>Sistemes Informàtics</modul>
+    <modul>Llenguatges de Marques i Sistemes de Gestió de la Informació</modul>
 </moduls>
 
 </matricula>
